@@ -79,6 +79,27 @@ Pin 27: A14 -> GND
 
 Pin 28: VCC (+5V)
 
+## Combining the two chips into a ROM file
+
+If you use this method, you will end up with a PGM ROM and a CHR ROM. Just copy the arduino serial output into a file for both chips. You will also need a header file. If you have a know working rom from the internet this is the first 16 Bytes or you should be able to research how to get it. Header is only needed for use in emulators.
+
+
+```bash
+$ ls
+eb-chr		eb-header	eb-pgm		head_bin	head_dump
+$ cat eb-pgm > pgm_dump
+$ xxd -p -r pgm_dump > pgm_bin
+$ cat eb-chr > chr_dump
+$ xxd -p -r chr_dump > chr_bin
+$ 
+$ ls
+chr_bin		eb-chr		eb-pgm		head_dump	pgm_dump
+chr_dump	eb-header	head_bin	pgm_bin
+$ cat head_bin pgm_bin chr_bin > ExciteBike.nes
+```
+
+
+In this case, ExciteBike.nes is the working ROM file!
 
 
 ## Credits
